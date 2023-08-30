@@ -1,9 +1,9 @@
-Package: micerest
+Package: micerocker
 Type: Package
 Title: Server Helper for Webmice RESTFUL API
-Version: 0.1.0
+Version: 0.1.1
 Description: Webmice is an online service for running mice through a 
-    RESTFUL API. The micerest package bundles the R functions needed to 
+    RESTFUL API. The micerocker package bundles the R functions needed to 
     define the end points.
 License: GPL (>= 3)
 Encoding: UTF-8
