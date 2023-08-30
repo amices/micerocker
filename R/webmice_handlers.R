@@ -1,3 +1,8 @@
+#' End point handlers
+#'
+#' @param .req Required arguments
+#' @param .res Result
+#' @export
 pool_handler <- function(.req, .res) {
   pool_json <- ""
   json_payload <- as.character(.req$parameters_query[["payload"]])
@@ -16,6 +21,8 @@ pool_handler <- function(.req, .res) {
   .res$set_content_type("text/plain")
 }
 
+#' @rdname pool_handler
+#' @export
 fit_handler <- function(.req, .res) {
   fit_json <- ""
   json_payload <- as.character(.req$parameters_query[["payload"]])
@@ -44,6 +51,8 @@ fit_handler <- function(.req, .res) {
   .res$set_content_type("text/plain")
 }
 
+#' @rdname pool_handler
+#' @export
 impute_longfmt_handler <- function(.req, .res) {
   json_payload <- as.character(.req$parameters_query[["payload"]])
 
@@ -78,12 +87,16 @@ impute_longfmt_handler <- function(.req, .res) {
   .res$set_content_type("text/plain")
 }
 
+#' @rdname pool_handler
+#' @export
 example_data_handler <- function(.req, .res) {
   example_name <- as.character(.req$parameters_query[["name"]])
   .res$set_body(example_data_to_json(example_name))
   .res$set_content_type("text/plain")
 }
 
+#' @rdname pool_handler
+#' @export
 mice_version_handler <- function(.req, .res) {
   version <- list()
   version$mice <- sessionInfo("mice")$otherPkgs$mice$Version
