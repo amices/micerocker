@@ -1,3 +1,8 @@
+# micerocker 0.1.2
+
+* Declares `mice` as `Depends` so that internal datasets will be findable
+* Sets minimum `mice` version to 3.16.4, specifies remotes for `mice`
+
 # micerocker 0.1.1
 
 * Exports all end point handler

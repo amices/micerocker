@@ -178,5 +178,6 @@ get_data_uploads <- function() {
       dir.create(data_uploads)
     }
   }
+  print(paste("DEBUG: data_uploads set to:", data_uploads))
   return(data_uploads)
 }

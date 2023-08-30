@@ -1,20 +1,22 @@
 Package: micerocker
 Type: Package
-Title: Server Helper for Webmice RESTFUL API
-Version: 0.1.1
+Title: Helpers for Online MICE API
+Version: 0.1.2
 Description: Webmice is an online service for running mice through a 
     RESTFUL API. The micerocker package bundles the R functions needed to 
     define the end points.
 License: GPL (>= 3)
 Encoding: UTF-8
-LazyData: true
 Authors@R: 
     person("Christine", "Staiger", , "first.last@example.com", 
     role = c("aut", "cre"), comment = c(ORCID = "YOUR-ORCID-ID"))
+Depends: 
+    mice (>= 3.16.4)
 Imports:
     digest,
     jsonlite,
-    mice,
     RestRserve,
     utils
+Remotes:
+    amices/mice
 RoxygenNote: 7.2.3
