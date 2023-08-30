@@ -36,7 +36,7 @@ read_file <- function(path) {
 #'
 #' @param string A string
 md5_string <- function(string) {
-  return(digest(paste(Sys.time(), string), algo = "md5", serialize = F))
+  return(digest(paste(Sys.time(), string), algo = "md5", serialize = FALSE))
 }
 
 
@@ -125,14 +125,16 @@ call_mice <- function(params, data_uploads) {
       imp$error <- "Failure: reading local csv file"
       return(imp)
     }
-    imp <- impute(mice::nhanes, maxit = params$maxit, m = params$m, seed = params$seed)
+    imp <- impute(mice::nhanes, maxit = params$maxit, m = params$m,
+                  seed = params$seed)
     return(imp)
   }
   if (typeof(params$data) == "character") {
     print("DEBUG: Imputation on uploaded file")
     df <- read_file(file.path(data_uploads, params$data))
     if (is.null(df)) {
-      imp$error <- "Failure: reading file, not an example dataset or file on server"
+      imp$error <-
+        "Failure: reading file, not an example dataset or file on server"
       return(imp)
     }
     imp <- impute(df, maxit = params$maxit, m = params$m, seed = params$seed)
