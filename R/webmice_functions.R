@@ -1,5 +1,8 @@
-#' Data
 #' Fetches example data from mice, returns data as json
+#'
+#' @param name An object name (given as a character string or a symbol).
+#' @returns Data as json
+#' @seealso \link[base]{get}
 example_data_to_json = function(name) {
   result = tryCatch({
     return(toJSON(get(name)))
@@ -12,6 +15,8 @@ example_data_to_json = function(name) {
 }
 
 #' Reads a csv file
+#'
+#' @param path The file path
 read_file = function(path){
     tryCatch({
       data <- read.csv(path)
@@ -22,14 +27,20 @@ read_file = function(path){
 }
 
 #' Creates a hash for a data file name
+#'
+#' @param string A string
 md5_string = function(string) {
   return(digest(paste(Sys.time(), string), algo="md5", serialize=F))
 }
 
-#' Convert JSON to R
-#' Takes a json string and returns it as R list 
-#' Test:
-#' input <- list(data="nhanes", maxit=2, m=2, seed=1)
+
+#' Takes a json string and returns it as R list
+#'
+#' @param json_payload The json payload
+#' @examples
+#' input <- jsonlite::toJSON(list(data="nhanes", maxit=2, m=2, seed=1))
+#' json_to_parameters(input)
+#' @export
 json_to_parameters = function(json_payload){
   result = tryCatch({
     params = fromJSON(json_payload)
@@ -39,8 +50,10 @@ json_to_parameters = function(json_payload){
   })
 }
 
-#' Mice return functions
 #' Takes the result of the imputation and returns the long format of the data
+#'
+#' @param imp Multiply imputed data set, an object of class \link[mice]{mids}
+#' @seealso \link[mice]{complete}
 imp_result_long_fmt = function(imp){
   return(toJSON(complete(imp, "long")))
 }
@@ -52,6 +65,7 @@ imp_result_pred_matrix = function(imp){
 }
 
 #' Mice functions
+#' @inheritParams mice::mice
 impute = function(data, maxit, m, seed) {
   imp <- list()
   imp$error <- ""
@@ -69,16 +83,21 @@ impute = function(data, maxit, m, seed) {
 }
 
 #' Calls mice's imputation function with parameters provided in a list 'params'
-#' Expected: params$data, params$maxit, params$m, params$seed
-#' data: example data name, a hash from an uploaded file, or a csv filee
-call_mice = function(params){
+#'
+#' @param params   A list with elements: `data`: A string with the name of the
+#' dataset, a hash from an uploaded file, or a csv file; `maxit`:
+#' number of iterations; `m`: number of imputations, `seed`: seed.
+#' @param data_uploads path to uploaded data on server
+#' @seealso \link[mice]{mice}
+#' @export
+call_mice = function(params, data_uploads){
   imp <- list()
   result = tryCatch({
     data <- get(params$data)
   }, error = function(e){
     return(-1)
   })
-  
+
   if(typeof(result) == "list") {
     print("DEBUG: Imputation on example data set")
     imp <- impute(data, maxit=params$maxit, m=params$m, seed=params$seed)
@@ -91,7 +110,7 @@ call_mice = function(params){
       imp$error <- "Failure: reading local csv file"
       return(imp)
     }
-    imp <- impute(nhanes, maxit=params$maxit, m=params$m, seed=params$seed)
+    imp <- impute(mice::nhanes, maxit=params$maxit, m=params$m, seed=params$seed)
     return(imp)
   }
   if(typeof(params$data) == "character"){
@@ -113,7 +132,7 @@ call_with = function(data, model, formula){
   }
   if(model == "glm"){
     fit <- with(data, glm(as.formula(formula)))
-  } 
+  }
   fit$error <- "Model not known"
   return(toJSON(summary(fit), force=TRUE))
 }
