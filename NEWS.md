@@ -2,6 +2,7 @@
 
 * Declares `mice` as `Depends` so that internal datasets will be findable
 * Sets minimum `mice` version to 3.16.4, specifies remotes for `mice`
+* Repairs an error in the logic of `get_data_uploads()`
 
 # micerocker 0.1.1
 

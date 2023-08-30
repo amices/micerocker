@@ -171,12 +171,12 @@ call_pool <- function(data) {
 }
 
 get_data_uploads <- function() {
-  data_uploads <- Sys.getenv("MICEREST_DATA_UPLOADS")
+  data_uploads <- Sys.getenv("MICEROCKER_DATA_UPLOADS")
   if (data_uploads == "") {
     data_uploads <- "data_uploads"
-    if (!file.exists(data_uploads)) {
-      dir.create(data_uploads)
-    }
+  }
+  if (!file.exists(data_uploads)) {
+    dir.create(data_uploads)
   }
   print(paste("DEBUG: data_uploads set to:", data_uploads))
   return(data_uploads)
