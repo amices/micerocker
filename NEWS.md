@@ -3,4 +3,5 @@
 * Selects files `webmice_function.R` and `webmice_handlers.R` from `amices/webmice`
 * Declares dependencies
 * Documents function arguments
+* Runs styler and linter to improves consistency
 * Creates initial package `micerest`
