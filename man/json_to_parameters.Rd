@@ -13,6 +13,6 @@ json_to_parameters(json_payload)
 Takes a json string and returns it as R list
 }
 \examples{
-input <- jsonlite::toJSON(list(data="nhanes", maxit=2, m=2, seed=1))
+input <- jsonlite::toJSON(list(data = "nhanes", maxit = 2, m = 2, seed = 1))
 json_to_parameters(input)
 }
