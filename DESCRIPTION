@@ -11,6 +11,10 @@ LazyData: true
 Authors@R: 
     person("Christine", "Staiger", , "first.last@example.com", 
     role = c("aut", "cre"), comment = c(ORCID = "YOUR-ORCID-ID"))
-Depends: 
+Imports:
+    digest,
+    jsonlite,
+    mice,
     RestRserve,
-    mice
+    utils
+RoxygenNote: 7.2.3
