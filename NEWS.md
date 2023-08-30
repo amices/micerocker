@@ -1,6 +1,7 @@
 # micerest 0.1.1
 
 * Exports all end point handler
+* Adds `data_uploads` argument to `mice_longfmt_handler()`
 
 # micerest 0.1.0
 

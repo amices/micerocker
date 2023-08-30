@@ -52,8 +52,9 @@ fit_handler <- function(.req, .res) {
 }
 
 #' @rdname pool_handler
+#' @param data_uploads Server directory with uploaded data
 #' @export
-impute_longfmt_handler <- function(.req, .res) {
+impute_longfmt_handler <- function(.req, .res, data_uploads) {
   json_payload <- as.character(.req$parameters_query[["payload"]])
 
   if (length(json_payload) == 0L) {
@@ -77,7 +78,7 @@ impute_longfmt_handler <- function(.req, .res) {
   }
 
   print("DEBUG: Calling mice")
-  imp <- call_mice(params)
+  imp <- call_mice(params, data_uploads)
 
   if (is.null(imp$error)) {
     .res$set_body(imp_result_long_fmt(imp))
