@@ -2,6 +2,7 @@
 
 * Exports all end point handler
 * Adds `data_uploads` argument to `mice_longfmt_handler()`
+* Replaces the role of the global R variables `data_uploads` by the environmental variable `MICEREST_DATA_UPLOADS`
 
 # micerest 0.1.0
 

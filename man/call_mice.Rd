@@ -4,14 +4,12 @@
 \alias{call_mice}
 \title{Calls mice's imputation function with parameters provided in a list 'params'}
 \usage{
-call_mice(params, data_uploads)
+call_mice(params)
 }
 \arguments{
 \item{params}{A list with elements: `data`: A string with the name of the
 dataset, a hash from an uploaded file, or a csv file; `maxit`:
 number of iterations; `m`: number of imputations, `seed`: seed.}
-
-\item{data_uploads}{path to uploaded data on server}
 }
 \description{
 Calls mice's imputation function with parameters provided in a list 'params'

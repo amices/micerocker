@@ -35,6 +35,7 @@ read_file <- function(path) {
 #' Creates a hash for a data file name
 #'
 #' @param string A string
+#' @export
 md5_string <- function(string) {
   return(digest(paste(Sys.time(), string), algo = "md5", serialize = FALSE))
 }
@@ -44,9 +45,10 @@ md5_string <- function(string) {
 #'
 #' @param json_payload The json payload
 #' @examples
+#' \dontrun{
 #' input <- jsonlite::toJSON(list(data = "nhanes", maxit = 2, m = 2, seed = 1))
 #' json_to_parameters(input)
-#' @export
+#' }
 json_to_parameters <- function(json_payload) {
   result <- tryCatch(
     {
@@ -99,10 +101,8 @@ impute <- function(data, maxit, m, seed) {
 #' @param params   A list with elements: `data`: A string with the name of the
 #' dataset, a hash from an uploaded file, or a csv file; `maxit`:
 #' number of iterations; `m`: number of imputations, `seed`: seed.
-#' @param data_uploads path to uploaded data on server
 #' @seealso \link[mice]{mice}
-#' @export
-call_mice <- function(params, data_uploads) {
+call_mice <- function(params) {
   imp <- list()
   result <- tryCatch(
     {
@@ -129,9 +129,10 @@ call_mice <- function(params, data_uploads) {
                   seed = params$seed)
     return(imp)
   }
+
   if (typeof(params$data) == "character") {
     print("DEBUG: Imputation on uploaded file")
-    df <- read_file(file.path(data_uploads, params$data))
+    df <- read_file(file.path(get_data_uploads(), params$data))
     if (is.null(df)) {
       imp$error <-
         "Failure: reading file, not an example dataset or file on server"
@@ -167,4 +168,15 @@ call_pool <- function(data) {
     pool$error <- "Input data not of correct type (summary(fit))"
   }
   return(toJSON(pool, force = TRUE))
+}
+
+get_data_uploads <- function() {
+  data_uploads <- Sys.getenv("MICEREST_DATA_UPLOADS")
+  if (data_uploads == "") {
+    data_uploads <- "data_uploads"
+    if (!file.exists(data_uploads)) {
+      dir.create(data_uploads)
+    }
+  }
+  return(data_uploads)
 }

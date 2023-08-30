@@ -12,7 +12,7 @@ pool_handler(.req, .res)
 
 fit_handler(.req, .res)
 
-impute_longfmt_handler(.req, .res, data_uploads)
+impute_longfmt_handler(.req, .res)
 
 example_data_handler(.req, .res)
 
@@ -22,8 +22,6 @@ mice_version_handler(.req, .res)
 \item{.req}{Required arguments}
 
 \item{.res}{Result}
-
-\item{data_uploads}{Server directory with uploaded data}
 }
 \description{
 End point handlers
