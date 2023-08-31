@@ -10,11 +10,10 @@ Encoding: UTF-8
 Authors@R: 
     person("Christine", "Staiger", , "first.last@example.com", 
     role = c("aut", "cre"), comment = c(ORCID = "YOUR-ORCID-ID"))
-Depends: 
-    mice (>= 3.16.4)
 Imports:
     digest,
     jsonlite,
+    mice (>= 3.16.4),
     RestRserve,
     utils
 Remotes:
