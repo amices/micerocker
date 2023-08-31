@@ -1,3 +1,8 @@
+# micerocker 0.1.3
+
+* Reverts to `Suggests: mice` to eliminate `warn.conflict` messages on startup
+* In order to access the mice built-in data, run `require("mice", warn.conflicts = FALSE)` before attaching `micerocker`
+
 # micerocker 0.1.2
 
 * Declares `mice` as `Depends` so that internal datasets will be findable

@@ -1,7 +1,7 @@
 Package: micerocker
 Type: Package
 Title: Helpers for Online MICE API
-Version: 0.1.2
+Version: 0.1.3
 Description: Webmice is an online service for running mice through a 
     RESTFUL API. The micerocker package bundles the R functions needed to 
     define the end points.
